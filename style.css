@@ -647,7 +647,7 @@ body:after {
     repeating-linear-gradient(45deg, #f8ecc9 0 4px, #d7a84f 4px 8px);
   border-radius: 4px 4px 2px 2px;
   position: absolute;
-  bottom: calc(100% + 44px);
+  bottom: calc(100% - 8px);
   left: 50%;
   margin-top: 0;
   width: 8px;
@@ -839,41 +839,41 @@ body:after {
   .envelope .back .letter {
     top: 50%;
     left: 50%;
-    width: 90vw;
+    width: 92vw;
     height: auto;
-    max-height: 70vh;
-    min-height: 0;
+    max-height: 72vh;
+    min-height: 72vh;
     transform: translate3d(-50%, -50%, 0);
-    padding: clamp(18px, 4vw, 24px) clamp(20px, 5vw, 30px) clamp(16px, 4vw, 22px);
-    gap: clamp(10px, 2.5vw, 14px);
+    padding: clamp(26px, 5vw, 34px) clamp(22px, 5.5vw, 32px) clamp(22px, 4.5vw, 28px);
+    gap: clamp(12px, 3vw, 18px);
     align-items: center;
     overflow-x: hidden;
     overflow-y: auto;
   }
 
   .envelope .back .letter .letter-content {
-    gap: clamp(8px, 2.3vw, 13px);
+    gap: clamp(10px, 2.8vw, 16px);
   }
 
   .envelope .back .letter .message {
-    gap: clamp(5px, 1.5vw, 8px);
+    gap: clamp(8px, 2vw, 12px);
   }
 
   .envelope .back .letter p.love-title {
-    font-size: clamp(42px, 10.5vw, 51px);
+    font-size: clamp(60px, 12vw, 72px);
     line-height: 1.5;
     margin-bottom: 0;
   }
 
   .envelope .back .letter p.love-copy {
-    font-size: clamp(25.5px, 6.9vw, 30px);
+    font-size: clamp(36px, 8vw, 44px);
     line-height: 1.5;
   }
 
   .envelope .back .letter p.love-signature {
     min-width: 0;
     width: 100%;
-    font-size: clamp(36px, 9vw, 45px);
+    font-size: clamp(54px, 11vw, 66px);
     line-height: 1.5;
     text-align: center;
     margin-top: 0;
@@ -884,10 +884,10 @@ body:after {
   }
 
   .envelope .back .letter .cake-section {
-    margin-top: clamp(4px, 1.6vw, 10px);
-    padding-top: clamp(64px, 17vw, 82px);
-    padding-bottom: clamp(18px, 5vw, 28px);
-    min-height: clamp(155px, 41vw, 190px);
+    margin-top: clamp(6px, 2vw, 12px);
+    padding-top: clamp(58px, 14vw, 76px);
+    padding-bottom: clamp(20px, 5vw, 30px);
+    min-height: clamp(170px, 44vw, 210px);
   }
 
   .cake {
@@ -931,30 +931,32 @@ body:after {
 
 @media (max-width: 480px) {
   .envelope .back .letter {
-    padding: 14px 16px 12px;
-    gap: 7px;
+    width: 92vw;
+    min-height: 72vh;
+    padding: 22px 18px 18px;
+    gap: 10px;
   }
 
   .envelope .back .letter .letter-content {
-    gap: 5px;
+    gap: 8px;
   }
 
   .envelope .back .letter .message {
-    gap: 3px;
+    gap: 6px;
   }
 
   .envelope .back .letter p.love-title {
-    font-size: clamp(36px, 10.5vw, 45px);
+    font-size: clamp(54px, 11vw, 66px);
     line-height: 1.5;
   }
 
   .envelope .back .letter p.love-copy {
-    font-size: clamp(22.5px, 6.6vw, 27px);
+    font-size: clamp(32px, 7vw, 38px);
     line-height: 1.5;
   }
 
   .envelope .back .letter p.love-signature {
-    font-size: clamp(30px, 8.4vw, 39px);
+    font-size: clamp(48px, 10vw, 58px);
     line-height: 1.5;
     margin-top: 0;
   }
@@ -964,9 +966,9 @@ body:after {
   }
 
   .envelope .back .letter .cake-section {
-    padding-top: clamp(52px, 15vw, 66px);
-    padding-bottom: 18px;
-    min-height: clamp(128px, 36vw, 156px);
+    padding-top: clamp(48px, 14vw, 62px);
+    padding-bottom: 20px;
+    min-height: clamp(150px, 40vw, 180px);
   }
 
   .envelope .back .letter .box:before,
