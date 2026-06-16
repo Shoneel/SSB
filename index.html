@@ -20,6 +20,7 @@ html,body{width:100%;height:100%;overflow:hidden}
 @keyframes sparkle{0%,100%{opacity:0.25;transform:scale(0.8)}50%{opacity:1;transform:scale(1.3)}}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heartFly{0%{transform:translate(-50%,-50%) scale(0.3);opacity:1}70%{opacity:1}100%{transform:translate(calc(-50% + var(--hx)),calc(-50% + var(--hy))) scale(var(--hs));opacity:0}}
 
 .scene{
   position:relative;
@@ -36,6 +37,7 @@ html,body{width:100%;height:100%;overflow:hidden}
 .star-dot{position:absolute;border-radius:50%;background:#fff;animation:sparkle ease-in-out infinite}
 .confetti-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}
 .confetti-piece{position:absolute;top:-12px;border-radius:2px;animation:fall linear infinite}
+.heart-piece{position:absolute;top:50%;left:50%;animation:heartFly cubic-bezier(0.15,0.7,0.4,1) forwards;pointer-events:none}
 
 .env-wrap{
   position:absolute;
@@ -187,6 +189,7 @@ html,body{width:100%;height:100%;overflow:hidden}
 <div class="scene" id="scene">
   <div class="bg-stars" id="bgStars"></div>
   <div class="confetti-layer" id="confettiLayer"></div>
+  <div class="confetti-layer" id="heartsLayer"></div>
 
   <div class="env-wrap" id="envWrap" onclick="handleClick()" aria-label="Birthday envelope, click to open">
     <div class="env-body" id="envBody">
@@ -342,7 +345,7 @@ function buildCard(s){
         <g class="flame-g" style="transform-origin:29px 8px"><ellipse cx="29" cy="8" rx="3" ry="4.5" fill="#ffaa00" opacity="0.9"/><ellipse cx="29" cy="9" rx="2" ry="3" fill="#fff176"/></g>
       </svg>
     </div>
-    <div class="msg-box" style="font-size:${msgSz};padding:${isSmall?'12px 13px':'16px 18px'};margin-bottom:${mbottom};font-family:system-ui,sans-serif">
+   <div class="msg-box" style="font-size:${msgSz};padding:${isSmall?'12px 13px':'16px 18px'};margin-bottom:${mbottom};font-family:system-ui,sans-serif">
       To my beautiful girl Happy Birthday bub 💕 they say age is just a number, but in your case, it just mean you get more irresistble every year. Here's to you — the most wonderful birthday girl! Cant't wait to eat you 🎉
     </div>
     <div class="hearts-row" style="font-size:${heartSz};gap:${isSmall?7:10}px;margin-bottom:${mbottom}">&#127775; &#128150; &#127874; &#128150; &#127775;</div>
@@ -351,11 +354,41 @@ function buildCard(s){
 </div>`;
 }
 
-function burst(){makeConfetti(80);}
+function makeHeartFireworks(){
+  const layer=document.getElementById('heartsLayer');
+  const bursts=5;
+  for(let b=0;b<bursts;b++){
+    setTimeout(()=>{
+      const cx=20+Math.random()*60;
+      const cy=20+Math.random()*45;
+      const count=14+Math.floor(Math.random()*6);
+      for(let i=0;i<count;i++){
+        const el=document.createElement('div');
+        el.className='heart-piece';
+        el.textContent='\uD83D\uDC9B';
+        const angle=(Math.PI*2*i)/count+Math.random()*0.3;
+        const dist=70+Math.random()*110;
+        const hx=Math.cos(angle)*dist;
+        const hy=Math.sin(angle)*dist;
+        const sz=14+Math.random()*16;
+        const dur=0.9+Math.random()*0.6;
+        el.style.cssText=`left:${cx}%;top:${cy}%;font-size:${sz}px;--hx:${hx}px;--hy:${hy}px;--hs:${0.4+Math.random()*0.5};animation-duration:${dur}s;`;
+        layer.appendChild(el);
+        setTimeout(()=>el.remove(),dur*1000+100);
+      }
+    },b*180);
+  }
+}
+
+function burst(){
+  makeConfetti(80);
+  makeHeartFireworks();
+}
 
 function replay(){
   phase=0;
   document.getElementById('confettiLayer').innerHTML='';
+  document.getElementById('heartsLayer').innerHTML='';
   document.getElementById('hint').style.opacity='1';
   const rising=document.querySelector('.card-rising');
   if(rising)rising.remove();
